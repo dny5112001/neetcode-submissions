@@ -1,0 +1,20 @@
+use std::collections::HashMap;
+
+impl Solution {
+    pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
+
+        let mut map:HashMap<[usize;26],Vec<String>> = HashMap::with_capacity(strs.len());
+
+        for s in strs{
+            let mut arr = [0usize; 26];
+            for &byte in s.as_bytes(){
+                arr[(byte-b'a') as usize] += 1;
+            }
+
+            map.entry(arr).or_default().push(s);
+        }
+
+        map.into_values().collect()
+
+    }
+}
